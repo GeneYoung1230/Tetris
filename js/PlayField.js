@@ -83,14 +83,14 @@ var PlayField = (function invocation() {
 
             if (tetrimino) {
                 //畫出來 tetrimino 預先顯示掉落處的部分。
-                this.ctx.globalAlpha = this.dropFillAlpha;
+                this.ctx.globalAlpha = this.color.dropFillAlpha;
                 var dropPosition = getDropPosition(this, tetrimino);
                 var gridPosition = TETRIMINO[tetrimino.type][tetrimino.direction];
                 for (var i = 0; i < gridPosition.length; i++) {
                     var position = gridPosition[i].split(",");
                     var x = dropPosition[0] + Number(position[0]);
                     var y = dropPosition[1] + Number(position[1]);
-                    drawGrid(this.ctx, x, y, this.dropFill, this.style.gridPixel, this.style.linePixel);
+                    drawGrid(this.ctx, x, y, this.color.dropFill, this.style.gridPixel, this.style.linePixel);
                 }
                 this.ctx.globalAlpha = 1;
 
