@@ -78,8 +78,21 @@ var PlayField = (function invocation() {
                     drawGrid(this.ctx, x, y, getColor(this.tetrisArray, x, y), this.style.gridPixel, this.style.linePixel);
                 }
             }
-            //畫出來 tetrimino 的部分。
+
             if (tetrimino) {
+                //畫出來 tetrimino 預先顯示掉落處的部分。
+                this.ctx.globalAlpha = 0.5;
+                var dropPosition = getDropPosition(this, tetrimino);
+                var gridPosition = TETRIMINO[tetrimino.type][tetrimino.direction];
+                for (var i = 0; i < gridPosition.length; i++) {
+                    var position = gridPosition[i].split(",");
+                    var x = dropPosition[0] + Number(position[0]);
+                    var y = dropPosition[1] + Number(position[1]);
+                    drawGrid(this.ctx, x, y, COLOR.DROP_FILL, this.style.gridPixel, this.style.linePixel);
+                }
+                this.ctx.globalAlpha = 1;
+
+                //畫出來 tetrimino 的部分。
                 var gridPosition = TETRIMINO[tetrimino.type][tetrimino.direction];
                 for (var i = 0; i < gridPosition.length; i++) {
                     var position = gridPosition[i].split(",");
@@ -88,6 +101,7 @@ var PlayField = (function invocation() {
                     drawGrid(this.ctx, x, y, COLOR.TETRIMINO[tetrimino.type], this.style.gridPixel, this.style.linePixel);
                 }
             }
+
             //最上面幾行擦掉。
             this.ctx.clearRect(0, 0, this.width * this.style.gridPixel, this.style.eraseLineCount * this.style.gridPixel);
         }
@@ -163,6 +177,16 @@ var PlayField = (function invocation() {
         } else {
             throw new Error("don't know what color it should be. grid[" + x + "][" + y + "]:" + JSON.stringify(grid));
         }
+    }
+
+    //取得掉落處的座標。
+    function getDropPosition(playField, tetrimino) {
+        var cloneTetrimino = new Tetrimino(tetrimino);
+        while (!playField.isCollision(cloneTetrimino)) {
+            cloneTetrimino.move(DIRECTION.DOWN);
+        }
+        cloneTetrimino.move(DIRECTION.UP);
+        return [cloneTetrimino.positionX, cloneTetrimino.positionY]
     }
 
     //畫一格。

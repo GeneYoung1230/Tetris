@@ -1,12 +1,19 @@
 //俄羅斯方塊。
 var Tetrimino = (function invocation() {
-    function Tetrimino() {
-        var typeArray = Object.keys(TETRIMINO);
-        var index = Math.floor(Math.random() * typeArray.length);
-        this.type = typeArray[index];
-        this.direction = 0;
-        this.positionX = 3;
-        this.positionY = 0;
+    function Tetrimino(tetrimino) {
+        if (tetrimino) {
+            this.type = tetrimino.type;
+            this.direction = tetrimino.direction;
+            this.positionX = tetrimino.positionX;
+            this.positionY = tetrimino.positionY;
+        } else {
+            var typeArray = Object.keys(TETRIMINO);
+            var index = Math.floor(Math.random() * typeArray.length);
+            this.type = typeArray[index];
+            this.direction = 0;
+            this.positionX = 3;
+            this.positionY = 0;
+        }
     }
 
     //移動俄羅斯方塊。
@@ -21,7 +28,7 @@ var Tetrimino = (function invocation() {
             case DIRECTION.DOWN:
                 this.positionY++;
                 break;
-            case DIRECTION.TOP:
+            case DIRECTION.UP:
                 this.positionY--;
                 break;
         }

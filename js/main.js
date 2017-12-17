@@ -57,7 +57,7 @@ window.onload = function () {
                     }
                     //如果此操作會發生碰撞，就返回剛剛對俄羅斯方塊的操作。
                     if (playField.isCollision(tetrimino)) {
-                        tetrimino.move(DIRECTION.TOP);
+                        tetrimino.move(DIRECTION.UP);
                         playField.save(tetrimino);
                         playField.redraw();
                         playField.checkAndDestroyLine();

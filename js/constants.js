@@ -21,6 +21,7 @@ const COLOR = {
     BACKGROUND_STROKE: "rgb(34,34,34)",
     //雙色相間的背景格子色。
     BACKGROUND_FILL: ["rgb(43,43,43)", "rgb(47,47,47)"],
+    //預先顯示掉落處的格子色。
     //依照不同種類的俄羅斯方塊給予不同的顏色。
     TETRIMINO: {
         I: "rgb(50,190,250)",
@@ -66,7 +67,7 @@ const STATUS = {
 const DIRECTION = {
     ANTICLOCKWISE: 0,
     CLOCKWISE: 1,
-    TOP: 2,
+    UP: 2,
     RIGHT: 3,
     DOWN: 4,
     LEFT: 5
