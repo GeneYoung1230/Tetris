@@ -23,6 +23,7 @@ const COLOR = {
     BACKGROUND_FILL: ["rgb(43,43,43)", "rgb(47,47,47)"],
     //預先顯示掉落處的格子色。
     DROP_FILL: "rgb(102,102,102)",
+    DROP_FILL_ALPHA: 0.5,
     //依照不同種類的俄羅斯方塊給予不同的顏色。
     TETRIMINO: {
         I: "rgb(50,190,250)",

@@ -14,7 +14,9 @@ var PlayField = (function invocation() {
         };
         this.color = {
             stoke: (color && color.stoke) || COLOR.BACKGROUND_STROKE,
-            fill: (color && color.fill) || COLOR.BACKGROUND_FILL
+            fill: (color && color.fill) || COLOR.BACKGROUND_FILL,
+            dropFill: (color && color.dropFill) || COLOR.DROP_FILL,
+            dropFillAlpha: (color && color.dropFillAlpha) || COLOR.DROP_FILL_ALPHA
         }
 
         this.tetrisArray = initialTetrisArray(this.width, this.height);
@@ -81,14 +83,14 @@ var PlayField = (function invocation() {
 
             if (tetrimino) {
                 //畫出來 tetrimino 預先顯示掉落處的部分。
-                this.ctx.globalAlpha = 0.5;
+                this.ctx.globalAlpha = this.dropFillAlpha;
                 var dropPosition = getDropPosition(this, tetrimino);
                 var gridPosition = TETRIMINO[tetrimino.type][tetrimino.direction];
                 for (var i = 0; i < gridPosition.length; i++) {
                     var position = gridPosition[i].split(",");
                     var x = dropPosition[0] + Number(position[0]);
                     var y = dropPosition[1] + Number(position[1]);
-                    drawGrid(this.ctx, x, y, COLOR.DROP_FILL, this.style.gridPixel, this.style.linePixel);
+                    drawGrid(this.ctx, x, y, this.dropFill, this.style.gridPixel, this.style.linePixel);
                 }
                 this.ctx.globalAlpha = 1;
 
